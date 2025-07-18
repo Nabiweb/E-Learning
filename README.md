@@ -68,9 +68,13 @@ src/
 ### Setup
 
 ```bash
-git clone https://github.com/yourusername/teacher-student-mcq-platform.git
-cd teacher-student-mcq-platform
+git clone https://github.com/Nabiweb/E-Learning.git
 npm install
+npm install -D tailwindcss@3 autoprefixer postcss 
+npx tailwindcss init --postcss  
+npm install react-router-dom 
+npm install firebase   
+npm install @google/genai  
 ```
 
 ### Firebase Configuration
