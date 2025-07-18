@@ -5,14 +5,13 @@ import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCAt-OeAoD5_yhkb9VMv_q4s1Mktg2McA0",
-  authDomain: "ai-interview-4f972.firebaseapp.com",
-  databaseURL: "https://ai-interview-4f972-default-rtdb.firebaseio.com",
-  projectId: "ai-interview-4f972",
-  storageBucket: "ai-interview-4f972.firebasestorage.app",
-  messagingSenderId: "1022231007487",
-  appId: "1:1022231007487:web:ee8bb7aa08ff0b53f33cca",
-  measurementId: "G-G9J0FWSKHC"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  databaseURL: "YOUR_DATABASE_URL",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MSG_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
 // ✅ Use existing app if initialized, otherwise initialize
