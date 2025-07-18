@@ -1,6 +1,6 @@
-# 📚 AI-Powered Teacher-Student MCQ Testing Platform
+# 📚 AI-Powered Teacher-Student E-Learning Platform
 
-Welcome to our **Teacher-Student MCQ Test System** built with **React.js** and **Firebase**. This platform connects students and teachers in a digital learning environment where teachers can create and post MCQ-based tests and topics, while students can search, take tests, and get instant feedback.
+Welcome to our **Teacher-Student E-Learning System** built with **React.js** and **Firebase**. This platform connects students and teachers in a digital learning environment where teachers can create and post MCQ-based tests and topics, while students can search, take tests, and get instant feedback.
 
 ---
 
