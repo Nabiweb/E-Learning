@@ -36,7 +36,7 @@ Welcome to our **Teacher-Student E-Learning System** built with **React.js** and
 
 ```plaintext
 src/
-├── components/
+├── pages/
 │   ├── Home.jsx             // Student home page with topic list
 │   ├── StudentsAuth.jsx     // Student login/signup page
 │   ├── StudentsTest.jsx     // Student test interface
