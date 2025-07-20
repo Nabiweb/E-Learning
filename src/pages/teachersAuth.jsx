@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, setDoc, doc } from 'firebase/firestore';
-import { db, auth, app } from "../firebase";
+import { setDoc, doc } from 'firebase/firestore';
+import { auth, firestore } from "../firebase";
 
 const TeachersAuth = () => {
   const [isSignUp, setIsSignUp] = useState(true);
@@ -28,7 +28,7 @@ const TeachersAuth = () => {
       const user = userCredential.user;
       const userData = { email, firstName, lastName };
 
-      await setDoc(doc(db, 'users', user.uid), userData);
+      await setDoc(doc(firestore, 'users', user.uid), userData);
       alert('Account Created Successfully');
       //setTimeout(() => navigate('/'), 1000); // Redirect to index
     } catch (error) {
@@ -74,8 +74,6 @@ const TeachersAuth = () => {
   return (
     <div className='p-5 h-screen flex flex-col justify-between'>
       <div >
-        <img className='w-14 mb-10' src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/2560px-Uber_logo_2018.svg.png" alt="" />
-
         <div className="flex justify-center items-center">
             <img src="https://img.icons8.com/?size=100&id=VPahQZa1Dl8N&format=png&color=000000" className="max-w-full h-auto" alt="Icon"/>
         </div>

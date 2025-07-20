@@ -8,6 +8,7 @@ import TeachersHome from "./pages/teachersHome";
 import TeachersAuth from "./pages/teachersAuth";
 import TeachersProfile from "./pages/teachersProfile";
 import DoubtArena from "./pages/doubtArena";
+import VideoSession from "./pages/VideoSession";
 import Test from "./pages/Test";
 
 const App = () => {
@@ -21,10 +22,12 @@ const App = () => {
 
         <Route path="/teachers-auth" element={<TeachersAuth />}/>
         <Route path="/teachers-home" element={<TeachersHome />} />
-        <Route path="/teachers-profile/:id" element={<TeachersProfile />} />
+        <Route path="/teachers-profile/:id" element={<TeachersProfile userRole="student" />} />
         <Route path="/ask-doubt" element={<DoubtArena />} />
 
         <Route path="/test" element={<Test />} />
+
+        <Route path="/video-session" element={<VideoSession userType="teacher" otherUserUID="student_1" />} />
       </Routes>
     </div>
   )

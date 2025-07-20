@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { href, Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { db } from "../firebase";
 import { ref, onValue } from "firebase/database";
 
 const TeachersProfile = () => {
   const { id } = useParams();
   const [teacher, setTeacher] = useState(null);
+  const userRole = localStorage.getItem("userRole"); // Retrieve user role (student or teacher)
 
   useEffect(() => {
     const teacherRef = ref(db, `teacherPosts/${id}`);
@@ -21,19 +22,19 @@ const TeachersProfile = () => {
 
   return (
     <div className='p-7 h-screen flex flex-col justify-between'>
-      <div >
+      <div>
         <div className="flex flex-col sm:items-start gap-6">
           <div className="flex flex-row gap-4 items-center">
             <img
-                src={teacher.teacherImage || "https://via.placeholder.com/120"}
-                alt={teacher.teacherName}
-                className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover flex-shrink-0"
+              src={teacher.teacherImage || "https://via.placeholder.com/120"}
+              alt={teacher.teacherName}
+              className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover flex-shrink-0"
             />
             <div className="flex flex-col">
-                <h2 className="text-xl sm:text-2xl font-bold mb-1">{teacher.teacherName}</h2>
-                <p className="text-gray-600 text-sm sm:text-base mb-4">
-                    Subjects: {teacher.subjects.join(", ")}
-                </p>
+              <h2 className="text-xl sm:text-2xl font-bold mb-1">{teacher.teacherName}</h2>
+              <p className="text-gray-600 text-sm sm:text-base mb-4">
+                Subjects: {teacher.subjects.join(", ")}
+              </p>
             </div>
           </div>
           <div className="flex-1">
@@ -44,34 +45,28 @@ const TeachersProfile = () => {
               <p className="text-gray-800 text-sm sm:text-base leading-relaxed">
                 {teacher.description}
               </p>
-              {teacher.link && (
-                <a
-                  href={teacher.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 underline text-sm sm:text-base mt-3 block hover:text-blue-800"
-                >
-                  Visit Resource
-                </a>
-              )}
+              <p className="text-gray-600 text-lg font-semibold sm:text-base mb-4">
+                testId: {teacher.testId}
+              </p>
             </div>
           </div>
         </div>
-        <div className="mt-6 flex flex-col justify-center my-5">
-          <Link
-            className='bg-[#10b461] flex item-center justify-center text-white font-semibold mb-5 rounded px-2 py-2 w-full text-lg placeholder:text-base'
-            to='/ask-doubt'
-          >
-            Ask Your Doubt
-          </Link>
-
-          <Link
-            className='bg-blue-600 flex item-center justify-center text-white font-semibold mb-5 rounded px-2 py-2 w-full text-lg placeholder:text-base'
-            to='/students-test'
-          >
-            Take a Test
-          </Link>
-        </div>
+        {userRole === "student" && (
+          <div className="mt-6 flex flex-col justify-center my-5">
+            <div className='bg-gray-900 flex flex-row items-center justify-center gap-5 text-white font-semibold mb-5 rounded px-2 py-2 w-full text-lg'>
+              <Link to='/ask-doubt'>
+                Ask Your Doubt
+              </Link>
+              <img className='h-6 w-6 mt-1' src="https://img.icons8.com/?size=100&id=eoxMN35Z6JKg&format=png&color=000000" alt="" />
+            </div>
+            <Link className='bg-blue-600 flex items-center justify-center text-white font-semibold mb-5 rounded px-2 py-2 w-full text-lg' to='/students-test'>
+              Give a Test
+            </Link>
+          </div>
+        )}
+        <Link className='bg-red-600 flex items-center justify-center text-white font-semibold mb-5 rounded px-2 py-2 w-full text-lg' to='/video-session'>
+              1:1 Video Session
+        </Link>
       </div>
     </div>
   );
