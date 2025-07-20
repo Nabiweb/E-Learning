@@ -48,6 +48,7 @@ const TeachersAuth = () => {
       const { email, password } = signInData;
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       localStorage.setItem('loggedInUserId', userCredential.user.uid);
+      localStorage.setItem('userRole', 'teacher')
       showMessage('Login is successful', 'success');
       setTimeout(() => navigate('/teachers-home'), 1000); // Redirect to homepage
     } catch (error) {

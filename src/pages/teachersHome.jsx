@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../firebase";
-import { ref, push, onValue } from "firebase/database";
+import { db, auth } from "../firebase";
+import { ref, push, onValue, get } from "firebase/database";
 import { Link, useNavigate } from "react-router-dom";
 
 const TeachersHome = () => {
@@ -12,6 +12,7 @@ const TeachersHome = () => {
   const [testId, setTestId] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [posts, setPosts] = useState([]);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -31,6 +32,16 @@ const TeachersHome = () => {
     });
   }, []);
 
+  const checkTestIdUnique = async (testIdToCheck) => {
+    const postsRef = ref(db, "teacherPosts");
+    const snapshot = await get(postsRef);
+    const posts = snapshot.val();
+    if (posts) {
+      return !Object.values(posts).some((post) => post.testId === testIdToCheck);
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -39,28 +50,45 @@ const TeachersHome = () => {
       return;
     }
 
-    const postRef = ref(db, "teacherPosts");
-    const newPostRef = await push(postRef, {
-      teacherName,
-      teacherImage,
-      subjects: subjects.split(",").map((s) => s.trim()),
-      topicName,
-      description,
-      testId,
-    });
+    if (!auth.currentUser) {
+      alert("You must be logged in to create a post.");
+      navigate("/login");
+      return;
+    }
 
-    const newPostId = newPostRef.key;
+    const isTestIdUnique = await checkTestIdUnique(testId);
+    if (!isTestIdUnique) {
+      setError("This Test ID is already in use by another teacher. Please choose a different one.");
+      return;
+    }
 
-    // Clear the form
-    setTeacherName("");
-    setTeacherImage("");
-    setSubjects("");
-    setTopicName("");
-    setDescription("");
-    setTestId("");
+    try {
+      const postRef = ref(db, "teacherPosts");
+      const newPostRef = await push(postRef, {
+        teacherName,
+        teacherImage,
+        subjects: subjects.split(",").map((s) => s.trim()),
+        topicName,
+        description,
+        testId,
+        createdBy: auth.currentUser.uid,
+      });
 
-    // Redirect to the teacher's profile
-    navigate(`/teachers-profile/${newPostId}`);
+      const newPostId = newPostRef.key;
+
+      setTeacherName("");
+      setTeacherImage("");
+      setSubjects("");
+      setTopicName("");
+      setDescription("");
+      setTestId("");
+      setError("");
+
+      navigate(`/teachers-profile/${newPostId}`);
+    } catch (error) {
+      console.error("Error creating post:", error);
+      setError("Failed to create post. Please try again.");
+    }
   };
 
   const filteredPosts = posts.filter((post) =>
@@ -70,6 +98,7 @@ const TeachersHome = () => {
   return (
     <div className="max-w-xl mx-auto p-6 bg-white shadow mt-10 rounded">
       <h2 className="text-2xl font-bold mb-6">Teacher Post</h2>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4 py-5">
         <input
           type="text"
