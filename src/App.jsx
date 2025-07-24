@@ -8,7 +8,7 @@ import TeachersHome from "./pages/teachersHome";
 import TeachersAuth from "./pages/teachersAuth";
 import TeachersProfile from "./pages/teachersProfile";
 import DoubtArena from "./pages/doubtArena";
-import VideoSession from "./pages/VideoSession";
+import Call from "./pages/Call";
 import Test from "./pages/Test";
 
 const App = () => {
@@ -27,7 +27,7 @@ const App = () => {
 
         <Route path="/test" element={<Test />} />
 
-        <Route path="/video-session" element={<VideoSession userType="teacher" otherUserUID="student_1" />} />
+        <Route path="/video-call/:roomId" element={<Call />} />
       </Routes>
     </div>
   )

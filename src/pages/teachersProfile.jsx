@@ -197,7 +197,7 @@ const TeachersProfile = () => {
           <div className="text-gray-600 text-lg font-semibold sm:text-base mb-4">
             <p>testId: {testId}</p>
           </div>
-          <Link className='bg-red-600 flex items-center justify-center text-white font-semibold mb-5 rounded px-2 py-2 w-full text-lg' to='/video-session'>
+          <Link to={`/video-call/${testId}`} className='bg-red-600 flex items-center justify-center text-white font-semibold mb-5 rounded px-2 py-2 w-full text-lg'>
               1:1 Video Session
           </Link>
         </div>

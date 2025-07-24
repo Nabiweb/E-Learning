@@ -13,6 +13,7 @@
     "@cometchat/chat-uikit-react": "^6.0.7",
     "@google/genai": "^1.10.0",
     "@remixicon/react": "^4.6.0",
+    "@zegocloud/zego-uikit-prebuilt": "^2.15.1",
     "firebase": "^12.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

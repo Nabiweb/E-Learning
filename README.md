@@ -74,7 +74,7 @@ npm install -D tailwindcss@3 autoprefixer postcss
 npx tailwindcss init --postcss  
 npm install react-router-dom 
 npm install firebase   
-
+npm i @zegocloud/zego-uikit-prebuilt #for video calling
 ```
 
 ### Firebase Configuration
