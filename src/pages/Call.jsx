@@ -24,11 +24,8 @@ const Call = () => {
     const r2 = randomID(5);
     const appID = Number(import.meta.env.VITE_ZEGO_APP_ID); // Access from .env
     const serverSecret = import.meta.env.VITE_ZEGO_SERVER_SECRET;  // Access from .env
-    console.log("appID : ",appID);
-    console.log("serverSecret : ",serverSecret);
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomId, r1, r2);
     const zc = ZegoUIKitPrebuilt.create(kitToken);
-    console.log('Zego Object:', zc);
     zc.joinRoom({
       container: element,
       scenario: {
